@@ -13,7 +13,7 @@ export function extendConfig(
       sourcemap: true,
       clean: !(options.watch === true || options.watch === "true"),
       format: ["cjs", "esm"],
-      dts: false,
+      dts: true,
       minify: true,
       ...overrideOptions,
     };
