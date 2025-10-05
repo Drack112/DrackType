@@ -39,7 +39,7 @@ module.exports = {
     "import/no-unresolved": [
       "error",
       {
-        ignore: ["^@dracktype/"],
+        ignore: ["^@monkeytype/"],
       },
     ],
     "no-mixed-operators": [
@@ -69,14 +69,6 @@ module.exports = {
     "no-redeclare": "off",
   },
   overrides: [
-    {
-      files: ["*.json"],
-      extends: ["plugin:json/recommended"],
-      plugins: ["json"],
-      rules: {
-        "json/*": ["error"],
-      },
-    },
     {
       // enable the rule specifically for TypeScript files
       files: ["*.ts", "*.tsx"],
