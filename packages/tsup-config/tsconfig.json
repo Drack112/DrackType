@@ -1,0 +1,15 @@
+{
+  "extends": "@dracktype/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "moduleResolution": "Node",
+    "module": "es6",
+    "target": "es2015",
+    "lib": ["es2016"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

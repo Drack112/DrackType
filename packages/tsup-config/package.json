@@ -1,0 +1,21 @@
+{
+  "name": "@dracktype/tsup-config",
+  "private": true,
+  "scripts": {
+    "dev": "tsup-node --watch",
+    "build": "tsup-node",
+    "ts-check": "tsc --noEmit",
+    "eslint": "eslint \"./src/**/*.ts\"",
+    "oxlint": "oxlint .",
+    "lint": "npm run oxlint && npm run eslint"
+  },
+  "peerDependencies": {
+    "tsup": "8.5.0"
+  },
+  "devDependencies": {
+    "@dracktype/typescript-config": "workspace:*",
+    "eslint": "8.57.1",
+    "oxlint": "1.15.0",
+    "typescript": "5.9.3"
+  }
+}
