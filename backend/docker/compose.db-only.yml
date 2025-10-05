@@ -1,0 +1,24 @@
+name: dracktype
+
+services:
+  redis:
+    container_name: dracktype_redis
+    image: redis:6.2.6
+    restart: on-failure
+    ports:
+      - "${DOCKER_REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+
+  mongodb:
+    container_name: dracktype_mongodb
+    image: mongo:5.0.15
+    restart: on-failure
+    ports:
+      - "${DOCKER_MONGODB_PORT:-27017}:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  redis-data:
+  mongodb-data:

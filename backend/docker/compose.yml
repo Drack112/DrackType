@@ -1,0 +1,49 @@
+name: dracktype
+
+services:
+  redis:
+    container_name: dracktype_redis
+    image: redis:6.2.6
+    restart: on-failure
+    ports:
+      - "${DOCKER_REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+
+  mongodb:
+    container_name: dracktype_mongodb
+    image: mongo:5.0.13
+    restart: on-failure
+    ports:
+      - "${DOCKER_MONGODB_PORT:-27017}:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+  api-server:
+    container_name: dracktype_api_server
+    build:
+      dockerfile_inline: |
+        FROM node:22.20.0
+        RUN npm i -g pnpm
+        RUN mkdir /pnpm-store && chown -R 1000:1000 /pnpm-store
+    user: "node"
+    restart: on-failure
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      - DB_URI=mongodb://mongodb:27017
+      - REDIS_URI=redis://redis:6379
+    ports:
+      - "${DOCKER_SERVER_PORT:-5005}:5005"
+    volumes:
+      - ../../:/dracktype
+    entrypoint: 'bash -c "echo starting, this may take a while... \
+      && cd /dracktype \
+      && pnpm config set store-dir /pnpm-store
+      && pnpm i \
+      && npm run dev-be"'
+
+volumes:
+  mongo-data:
+  redis-data:

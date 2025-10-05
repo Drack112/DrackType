@@ -1,0 +1,49 @@
+{
+  "name": "@dracktype/backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "eslint": "eslint \"./src/**/*.ts\"",
+    "oxlint": "oxlint .",
+    "lint": "npm run oxlint && npm run eslint",
+    "build": "npm run gen-docs && tsc --build",
+    "watch": "tsc --build --watch",
+    "clean": "tsc --build --clean",
+    "ts-check": "tsc --noEmit",
+    "start": "node ./dist/server.js",
+    "test": "vitest run --project=unit",
+    "integration-test": "vitest run --project=integration --project=integration-isolated",
+    "test-coverage": "vitest run --coverage",
+    "dev": "concurrently -p none \"tsx watch --clear-screen=false --inspect ./src/server.ts\" \"tsc --preserveWatchOutput --noEmit --watch\"  \"esw src/ -w --ext .ts --cache --color\"",
+    "docker-db-only": "docker compose -f docker/compose.db-only.yml up",
+    "docker": "docker compose -f docker/compose.yml up",
+    "gen-docs": "tsx scripts/openapi.ts dist/static/api/openapi.json && redocly build-docs -o dist/static/api/internal.html internal@v2 && redocly bundle -o dist/static/api/public.json public-filter && redocly build-docs -o dist/static/api/public.html public@v2"
+  },
+  "dependencies": {
+    "@dracktype/util": "workspace:*",
+    "chalk": "5.6.2",
+    "cors": "2.8.5",
+    "dotenv": "17.2.3",
+    "express": "5.1.0",
+    "helmet": "8.1.0",
+    "winston": "3.18.3"
+  },
+  "devDependencies": {
+    "@dracktype/eslint-config": "workspace:*",
+    "@dracktype/oxlint-config": "workspace:*",
+    "@dracktype/typescript-config": "workspace:*",
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.3",
+    "@types/node": "24.6.2",
+    "concurrently": "9.2.1",
+    "eslint": "8.57.1",
+    "eslint-watch": "8.0.0",
+    "openapi3-ts": "4.5.0",
+    "oxlint": "1.15.0",
+    "readline-sync": "1.4.10",
+    "testcontainers": "11.7.1",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  }
+}
