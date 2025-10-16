@@ -20,12 +20,18 @@
     "gen-docs": "tsx scripts/openapi.ts dist/static/api/openapi.json && redocly build-docs -o dist/static/api/internal.html internal@v2 && redocly bundle -o dist/static/api/public.json public-filter && redocly build-docs -o dist/static/api/public.html public@v2"
   },
   "dependencies": {
+    "@dracktype/contracts": "workspace:*",
+    "@dracktype/schemas": "workspace:*",
     "@dracktype/util": "workspace:*",
     "chalk": "5.6.2",
     "cors": "2.8.5",
     "dotenv": "17.2.3",
+    "etag": "1.8.1",
     "express": "5.1.0",
+    "firebase-admin": "13.5.0",
     "helmet": "8.1.0",
+    "lodash": "4.17.21",
+    "mongodb": "6.20.0",
     "winston": "3.18.3"
   },
   "devDependencies": {
@@ -33,7 +39,9 @@
     "@dracktype/oxlint-config": "workspace:*",
     "@dracktype/typescript-config": "workspace:*",
     "@types/cors": "2.8.19",
+    "@types/etag": "1.8.4",
     "@types/express": "5.0.3",
+    "@types/lodash": "4.17.20",
     "@types/node": "24.6.2",
     "concurrently": "9.2.1",
     "eslint": "8.57.1",
